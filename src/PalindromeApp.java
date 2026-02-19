@@ -46,11 +46,36 @@ public class PalindromeApp {
         }
         System.out.println();
         Scanner sc = new Scanner(System.in);
-        System.out.println("would you like a demo? (true or false)");
+        System.out.println("Would you like a demo? (true or false)");
         boolean demo=sc.nextBoolean();
+        sc.nextLine();
         if (demo) {
             hardCodedCheck();
         }
+        System.out.println("\nWould you like to try?\nEnter a word:");
+        String word = sc.nextLine();
+
+        if (!word.isEmpty()) {
+            PalindromeVerifier pv = new PalindromeVerifier();
+            System.out.println("\n--- Method 1: Iterative Check ---");
+            pv.checkPalindrome(word);
+
+            System.out.println("\n--- Method 2: Stack Check ---");
+            pv.stackCheck(word);
+
+            System.out.println("\n--- Method 3: Array Check ---");
+            pv.stackCheck(word);
+
+            System.out.println("\n--- Method 4: Queue-Stack Check ---");
+            pv.queueStackCheck(word);
+
+            System.out.println("\n--- Method 5: Deque Check ---");
+            pv.checkPalindromeUC7(word);
+
+            System.out.println("\n--- Method 6: Reverse Check ---");
+            pv.checkPalindromeUC3(word);
+        }
+
 
     }
 }
