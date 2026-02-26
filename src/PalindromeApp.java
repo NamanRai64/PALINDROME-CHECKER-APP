@@ -12,6 +12,42 @@ public class PalindromeApp {
                     " string is a palindrome under different conditions, while strengthening core programming fundamentals and data structure concepts.");
         }
     }
+    static void runPerformanceTest(String word) {
+
+        System.out.println("\n--- UC13: Performance Comparison ---");
+
+        PalindromeStrategy[] strategies = {
+                new StackStrategy(),
+                new DequeStrategy()
+        };
+
+        String[] strategyNames = {
+                "Stack Strategy",
+                "Deque Strategy"
+        };
+
+        int iterations = 100000;
+
+        System.out.println("Running " + iterations + " iterations...\n");
+
+        for (int i = 0; i < strategies.length; i++) {
+
+            long startTime = System.nanoTime();
+
+            for (int j = 0; j < iterations; j++) {
+                strategies[i].isPalindrome(word);
+            }
+
+            long endTime = System.nanoTime();
+            long duration = endTime - startTime;
+
+            long avgTime = duration / iterations;
+
+            System.out.println(strategyNames[i] + ":");
+            System.out.println("Total Time   = " + duration + " ns");
+            System.out.println("Average Time = " + avgTime + " ns\n");
+        }
+    }
     public static int getRandomInt(int min, int max) {
         // Formula for inclusive range [min, max]
         return (int)(Math.random() * ((max - min) + 1)) + min;
@@ -28,7 +64,7 @@ public class PalindromeApp {
         System.out.println("Input text: "+exampleWord);
         for(int i=0,n=exampleWord.length();i<n-1;i++){
             if(exampleWord.charAt(i)!=exampleWord.charAt(n-i-1)){
-                System.out.println(exampleWord + " is it a palindrome");
+                System.out.println(exampleWord + " is NOT a palindrome");
                 return;
             }
         }
@@ -74,8 +110,29 @@ public class PalindromeApp {
 
             System.out.println("\n--- Method 6: Reverse Check ---");
             pv.checkPalindromeUC3(word);
+
+            System.out.println("\n--- Method 7: Linked List Reverse Check ---");
+            pv.LLcheck(word);
+
+            System.out.println("\n--- Method 8: Recursive Check ---");
+            pv.RecursiveChecker(word);
+
+            System.out.println("\n--- Method 9: Case Insensitive Array Check ---");
+            pv.caseInsensitiveCheck(word);
+
+            System.out.println("\n--- Method 10: Case Insensitive Array Check ---");
+            pv.caseInsensitiveCheck(word);
+
+            System.out.println("\n--- Method 11: Strategy Pattern ---");
+
+            PalindromeContext context = new PalindromeContext(new StackStrategy());
+            context.executeStrategy(word);
+
+            System.out.println("\nSwitching to Deque Strategy...");
+            context.setStrategy(new DequeStrategy());
+            context.executeStrategy(word);
+
+            runPerformanceTest(word);
         }
-
-
     }
 }

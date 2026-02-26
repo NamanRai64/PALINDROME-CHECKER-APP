@@ -122,4 +122,36 @@ public class PalindromeVerifier {
             System.out.println(word + " is NOT a palindrome");
         }
     }
+    public void LLcheck(String word) {
+        LinkList wordlist = new LinkList();
+        wordlist.initialize(word);
+        if (wordlist.isPalindrome()) {
+            System.out.println(word + " IS a palindrome");
+        } else {
+            System.out.println(word + " is NOT a palindrome");
+        }
+    }
+
+    public void RecursiveChecker(String word) {
+        if (Rchecker(word,0,word.length()-1)) {
+            System.out.println(word + " IS a palindrome");
+        } else {
+            System.out.println(word + " is NOT a palindrome");
+        }
+    }
+    public boolean Rchecker(String word,int front,int rear) {
+        if(front!=rear) {
+            if (word.charAt(front)==word.charAt(rear)) {
+                Rchecker(word,front+1,rear-1);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void caseInsensitiveCheck(String word){
+        arrayCheck(word.toLowerCase());
+    }
 }
